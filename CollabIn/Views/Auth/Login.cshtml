@@ -4,18 +4,33 @@
 }
 
 <h2>Login</h2>
+@if (TempData["ErrorMsg"] != null)
+{
+    <div class="alert alert-danger">@TempData["ErrorMsg"]</div>
+}
 
 <form method="post">
     <div class="mb-3">
         <label for="Username" class="form-label">Username</label>
-        <input type="text" class="form-control" placeholder="Enter username">
+        <input type="text" class="form-control" value="@Model.Username" name="Username" placeholder="Enter username" />
     </div>
+
     <div class="mb-3">
         <label for="Password" class="form-label">Password</label>
-        <input type="password" class="form-control" placeholder="Enter password">
+        <input type="password" class="form-control" name="Password" placeholder="Enter password" />
     </div>
-    <button type="submit" class="btn btn-primary">Submit</button>
+
+    <div class="mb-3">
+        <label for="Usertype" class="form-label">User Type</label>
+        <select class="form-select" id="Usertype" name="Usertype">
+            <option value="@Model.Usertype">-- Select User Type --</option>
+            <option value="Member">Member</option>
+            <option value="Supervisor">Supervisor</option>
+        </select>
+    </div>
+
+    <button type="submit" class="btn btn-primary">Login</button>
     @Html.ActionLink("Register", "Register", "Auth", new { area = "" }, new { @class = "btn btn-secondary" })
-    
 </form>
+
 

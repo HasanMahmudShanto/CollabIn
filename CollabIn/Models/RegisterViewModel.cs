@@ -22,7 +22,7 @@ namespace CollabIn.Models
         public string Password { get; set; }
 
         [Required]
-        [EmailAddress]
+        [RegularExpression(@"^[^\s@]+@[^\s@]+\.[^\s@]+$")]
         public string Email { get; set; }
 
         [Validate(18)]

@@ -16,10 +16,44 @@ namespace CollabIn.Controllers
 
 
         //Main login page
+        [HttpGet]
         public ActionResult Login()
         {
-            return View();
+            return View(new LoginViewModel());
         }
+        [HttpPost]
+        public ActionResult Login(LoginViewModel model)
+        {
+            if (!ModelState.IsValid)
+                return View(model);
+
+            var passwordHash = GetMd5Hash(model.Password);
+            object user = null;
+            string redirectController = "";
+
+            if (model.Usertype == "Member")
+            {
+                user = db.Members
+                         .SingleOrDefault(u => u.Username == model.Username && u.Password == passwordHash);
+                redirectController = "MemberDashboard";
+            }
+            else if (model.Usertype == "Supervisor")
+            {
+                user = db.Supervisors
+                         .SingleOrDefault(u => u.Username == model.Username && u.Password == passwordHash);
+                redirectController = "SupervisorDashboard";
+            }
+
+            if (user == null)
+            {
+                TempData["ErrorMsg"] = "Invalid Username or Password";
+                return View(model);
+            }
+
+            // Login successful
+            return RedirectToAction("Dashboard", redirectController);
+        }
+
 
         [HttpGet]
         public ActionResult Register()
@@ -42,7 +76,7 @@ namespace CollabIn.Controllers
                     FirstName = model.FirstName,
                     LastName = model.LastName,
                     Username = model.Username,
-                    Password = GetMd5Hash(model.Password), // hash this
+                    Password = GetMd5Hash(model.Password),
                     Email = model.Email,
                     Dob = model.Dob
                 };
