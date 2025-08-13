@@ -1,0 +1,21 @@
+﻿
+@{
+    ViewBag.Title = "Login";
+}
+
+<h2>Login</h2>
+
+<form method="post">
+    <div class="mb-3">
+        <label for="Username" class="form-label">Username</label>
+        <input type="text" class="form-control" placeholder="Enter username">
+    </div>
+    <div class="mb-3">
+        <label for="Password" class="form-label">Password</label>
+        <input type="password" class="form-control" placeholder="Enter password">
+    </div>
+    <button type="submit" class="btn btn-primary">Submit</button>
+    @Html.ActionLink("Register", "Register", "Auth", new { area = "" }, new { @class = "btn btn-secondary" })
+    
+</form>
+

@@ -1,0 +1,62 @@
+﻿
+@{
+    ViewBag.Title = "Register";
+}
+
+<h2>Register</h2>
+<form method="post">
+    <div class="mb-3">
+        <label for="FirstName" class="form-label">First Name</label>
+        <input type="text" id="FirstName" name="FirstName" class="form-control"
+               value="@Model.FirstName" placeholder="Enter first name" />
+        <span class="text-danger">@Html.ValidationMessage("FirstName")</span>
+    </div>
+
+    <div class="mb-3">
+        <label for="LastName" class="form-label">Last Name</label>
+        <input type="text" id="LastName" name="LastName" class="form-control"
+               value="@Model.LastName" placeholder="Enter last name" />
+        <span class="text-danger">@Html.ValidationMessage("LastName")</span>
+    </div>
+
+    <div class="mb-3">
+        <label for="Username" class="form-label">Username</label>
+        <input type="text" id="Username" name="Username" class="form-control"
+               value="@Model.Username" placeholder="Choose a username" />
+        <span class="text-danger">@Html.ValidationMessage("Username")</span>
+    </div>
+
+    <div class="mb-3">
+        <label for="Password" class="form-label">Password</label>
+        <input type="password" id="Password" name="Password" class="form-control"
+               value="@Model.Password" placeholder="Enter password" />
+        <span class="text-danger">@Html.ValidationMessage("Password")</span>
+    </div>
+
+    <div class="mb-3">
+        <label for="Email" class="form-label">Email</label>
+        <input type="email" id="Email" name="Email" class="form-control"
+               value="@Model.Email" placeholder="Enter email" />
+        <span class="text-danger">@Html.ValidationMessage("Email")</span>
+    </div>
+
+    <div class="mb-3">
+        <label for="Dob" class="form-label">Date of Birth</label>
+        <input type="date" id="Dob" name="Dob" class="form-control"
+               value="@(Model.Dob != default(DateTime) ? Model.Dob.ToString("yyyy-MM-dd") : "")" />
+        <span class="text-danger">@Html.ValidationMessage("Dob")</span>
+    </div>
+
+    <div class="mb-3">
+        <label for="UserType" class="form-label">User Type</label>
+        <select id="UserType" name="UserType" class="form-control">
+            <option value="">Select user type</option>
+            <option value="Member" @(Model.UserType == "Member" ? "selected" : "")>Member</option>
+            <option value="Supervisor" @(Model.UserType == "Supervisor" ? "selected" : "")>Supervisor</option>
+        </select>
+        <span class="text-danger">@Html.ValidationMessage("UserType")</span>
+    </div>
+
+    <button type="submit" class="btn btn-primary">Register</button>
+</form>
+
