@@ -32,8 +32,8 @@
     <Property Name="Title" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
     <Property Name="Status" Type="String" MaxLength="10" FixedLength="true" Unicode="true" Nullable="false" />
     <Property Name="Members" Type="Int32" Nullable="false" />
-    <Property Name="StartDate" Type="DateTime" Nullable="false" Precision="0" />
-    <Property Name="EndDate" Type="DateTime" Nullable="false" Precision="0" />
+    <Property Name="StartDate" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="EndDate" Type="DateTime" Nullable="false" Precision="3" />
     <Property Name="SupervisorId" Type="Int32" Nullable="false" />
     <NavigationProperty Name="ProjectMembers" Relationship="Self.FK_ProjectMember_Projects" FromRole="Projects" ToRole="ProjectMember" />
     <NavigationProperty Name="Supervisor" Relationship="Self.FK_Projects_Supervisors" FromRole="Projects" ToRole="Supervisors" />

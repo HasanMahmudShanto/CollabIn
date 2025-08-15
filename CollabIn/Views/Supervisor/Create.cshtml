@@ -1,0 +1,57 @@
+﻿
+@{
+    ViewBag.Title = "Create";
+}
+
+<h2>Create</h2>
+<div class="container mt-5">
+    <div class="card shadow-lg border-0 rounded-4">
+        <div class="card-header bg-primary text-white rounded-top-4">
+            <h4 class="mb-0">Create New Project</h4>
+        </div>
+        <div class="card-body p-4">
+
+            @if (TempData["SuccessMsg"] != null)
+            {
+                <div class="alert alert-success rounded-3" role="alert">
+                    @TempData["SuccessMsg"]
+                </div>
+            }
+
+            <!-- Error Message -->
+            @if (TempData["ErrorMsg"] != null)
+            {
+                <div class="alert alert-danger rounded-3" role="alert">
+                    @TempData["ErrorMsg"]
+                </div>
+            }
+
+            <form method="post">
+                <!-- Project Title -->
+                <div class="mb-3">
+                    <label for="projectTitle" class="form-label fw-semibold">Project Title</label>
+                    <input type="text" name="Title" class="form-control" id="projectTitle" placeholder="Enter project title">
+                </div>
+
+                <!-- Start Date -->
+                <div class="mb-3">
+                    <label for="startDate" class="form-label fw-semibold">Start Date & Time</label>
+                    <input type="datetime-local" name="StartDate" class="form-control" id="startDate">
+                </div>
+
+                <!-- End Date -->
+                <div class="mb-3">
+                    <label for="endDate" class="form-label fw-semibold">End Date & Time</label>
+                    <input type="datetime-local" name="EndDate" class="form-control" id="endDate">
+                </div>
+
+                <!-- Submit Button -->
+                <div class="d-grid">
+                    <button type="submit" class="btn btn-primary btn-lg rounded-pill">
+                        Create Project
+                    </button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>

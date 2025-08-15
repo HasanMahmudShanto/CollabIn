@@ -22,36 +22,52 @@ namespace CollabIn.Controllers
             return View(new LoginViewModel());
         }
         [HttpPost]
-        public ActionResult Login(LoginViewModel model)
+        public ActionResult Login(LoginViewModel Model)
         {
             if (!ModelState.IsValid)
-                return View(model);
+                return View(Model);
 
-            var passwordHash = GetMd5Hash(model.Password);
-            object user = null;
-            string redirectController = "";
+            var PasswordHash = GetMd5Hash(Model.Password);
+            string RedirectController = "";
+            bool UserFound = false;
 
-            if (model.Usertype == "Member")
+            if (Model.Usertype == "Member")
             {
-                user = db.Members
-                         .SingleOrDefault(u => u.Username == model.Username && u.Password == passwordHash);
-                redirectController = "MemberDashboard";
+                var User = (from u in db.Members
+                        where u.Username.Equals(Model.Username) &&
+                        u.Password.Equals(PasswordHash)
+                        select u).SingleOrDefault();
+                if (User != null)
+                {
+                    UserFound = true;
+                    Session["user"] = User;
+                    RedirectController = "MemberDashboard";
+                }
+                
             }
-            else if (model.Usertype == "Supervisor")
+            else if (Model.Usertype == "Supervisor")
             {
-                user = db.Supervisors
-                         .SingleOrDefault(u => u.Username == model.Username && u.Password == passwordHash);
-                redirectController = "SupervisorDashboard";
+                var User = (from u in db.Supervisors
+                        where u.Username.Equals(Model.Username) &&
+                        u.Password.Equals(PasswordHash)
+                        select u).SingleOrDefault();
+                if (User != null)
+                {
+                    UserFound = true;
+                    Session["User"] = User;
+                    RedirectController = "SupervisorDashboard";
+                }
+                
             }
 
-            if (user == null)
+            if (!UserFound)
             {
                 TempData["ErrorMsg"] = "Invalid Username or Password";
-                return View(model);
+                return View(Model);
             }
-
+            
             // Login successful
-            return RedirectToAction("Dashboard", redirectController);
+            return RedirectToAction(RedirectController,"Supervisor");
         }
 
 
