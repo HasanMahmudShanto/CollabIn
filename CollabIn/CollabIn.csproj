@@ -198,6 +198,7 @@
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\AuthController.cs" />
     <Compile Include="Controllers\SupervisorController.cs" />
+    <Compile Include="DTOs\ProjectDetailsDTO.cs" />
     <Compile Include="DTOs\ProjectDTO.cs" />
     <Compile Include="EF\Collabin_data.Context.cs">
       <AutoGen>True</AutoGen>
@@ -306,6 +307,8 @@
     <Content Include="Views\Auth\Register.cshtml" />
     <Content Include="Views\Supervisor\Create.cshtml" />
     <Content Include="Views\Supervisor\SupervisorDashboard.cshtml" />
+    <Content Include="Views\Supervisor\ProjectDetail.cshtml" />
+    <Content Include="Views\Supervisor\Edit.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

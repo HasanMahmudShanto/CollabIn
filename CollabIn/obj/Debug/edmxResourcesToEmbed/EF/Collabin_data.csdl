@@ -37,6 +37,7 @@
     <Property Name="SupervisorId" Type="Int32" Nullable="false" />
     <NavigationProperty Name="ProjectMembers" Relationship="Self.FK_ProjectMember_Projects" FromRole="Projects" ToRole="ProjectMember" />
     <NavigationProperty Name="Supervisor" Relationship="Self.FK_Projects_Supervisors" FromRole="Projects" ToRole="Supervisors" />
+    <Property Name="Details" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
   </EntityType>
   <EntityType Name="Supervisor">
     <Key>

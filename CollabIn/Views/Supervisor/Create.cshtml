@@ -26,32 +26,38 @@
                 </div>
             }
 
-            <form method="post">
-                <!-- Project Title -->
-                <div class="mb-3">
-                    <label for="projectTitle" class="form-label fw-semibold">Project Title</label>
-                    <input type="text" name="Title" class="form-control" id="projectTitle" placeholder="Enter project title">
-                </div>
+        <form method="post">
+            <!-- Project Title -->
+            <div class="mb-3">
+                <label for="projectTitle" class="form-label fw-semibold">Project Title</label>
+                <input type="text" name="Title" class="form-control" id="projectTitle" placeholder="Enter project title">
+            </div>
 
-                <!-- Start Date -->
-                <div class="mb-3">
-                    <label for="startDate" class="form-label fw-semibold">Start Date & Time</label>
-                    <input type="datetime-local" name="StartDate" class="form-control" id="startDate">
-                </div>
+            <!-- Start Date -->
+            <div class="mb-3">
+                <label for="startDate" class="form-label fw-semibold">Start Date & Time</label>
+                <input type="datetime-local" name="StartDate" class="form-control" id="startDate">
+            </div>
 
-                <!-- End Date -->
-                <div class="mb-3">
-                    <label for="endDate" class="form-label fw-semibold">End Date & Time</label>
-                    <input type="datetime-local" name="EndDate" class="form-control" id="endDate">
-                </div>
+            <!-- End Date -->
+            <div class="mb-3">
+                <label for="endDate" class="form-label fw-semibold">End Date & Time</label>
+                <input type="datetime-local" name="EndDate" class="form-control" id="endDate">
+            </div>
 
-                <!-- Submit Button -->
-                <div class="d-grid">
-                    <button type="submit" class="btn btn-primary btn-lg rounded-pill">
-                        Create Project
-                    </button>
-                </div>
-            </form>
+            <!-- Details -->
+            <div class="mb-3">
+                <label for="projectDetails" class="form-label fw-semibold">Project Details</label>
+                <textarea name="Details" class="form-control" rows="4" placeholder="Enter detailed description of the project"></textarea>
+            </div>
+
+            <!-- Submit Button -->
+            <div class="d-grid">
+                <button type="submit" class="btn btn-primary btn-lg rounded-pill">
+                    Create Project
+                </button>
+            </div>
+        </form>
         </div>
     </div>
 </div>

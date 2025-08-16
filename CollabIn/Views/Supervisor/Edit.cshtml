@@ -1,0 +1,114 @@
+﻿
+@{
+    ViewBag.Title = "Edit";
+}
+
+<h2>Edit</h2>
+
+@model CollabIn.DTOs.ProjectDetailsDTO
+
+@{
+    ViewBag.Title = "Edit Project";
+}
+
+<h2>Edit Project</h2>
+
+<div class="container my-5">
+    @if (TempData["SuccessMsg"] != null)
+    {
+        <div class="alert alert-success rounded-3" role="alert">
+            @TempData["SuccessMsg"]
+        </div>
+    }
+    <form asp-action="ProjectEdit" method="post">
+        <input type="hidden" name="Id" value="@Model.Id" />
+
+        <!-- Header -->
+        <div class="row mb-4">
+            <div class="col">
+                <h2 class="fw-bold">Edit Project: @Model.Title</h2>
+            </div>
+            <div class="col text-end">
+                <a href="@Url.Action("Dashboard", "Supervisor")" class="btn btn-outline-secondary me-2">Back to Dashboard</a>
+            </div>
+        </div>
+
+        <!-- Project Details Card -->
+        <div class="card shadow-sm border-0">
+            <div class="card-body">
+
+                <!-- Title -->
+                <div class="mb-3">
+                    <label for="Title" class="form-label">Project Title</label>
+                    <input type="text" class="form-control" id="Title" name="Title" value="@Model.Title" required />
+                </div>
+
+                <!-- Status -->
+                <div class="mb-3">
+                    <label for="Status" class="form-label">Status</label>
+                    <select class="form-select" id="Status" name="Status" required>
+                        <option value="Open" @(Model.Status == "Open" ? "selected" : "")>Open</option>
+                        <option value="Ongoing" @(Model.Status == "Ongoing" ? "selected" : "")>Ongoing</option>
+                        <option value="Closed" @(Model.Status == "Closed" ? "selected" : "")>Closed</option>
+                    </select>
+                </div>
+
+                <!-- Start and End Dates -->
+                <div class="row mb-3">
+                    <div class="col-md-6">
+                        <label for="StartDate" class="form-label">Start Date</label>
+                        <input type="datetime-local" class="form-control" id="StartDate" name="StartDate"
+                               value="@Model.StartDate.ToString("yyyy-MM-ddTHH:mm")" required />
+                    </div>
+                    <div class="col-md-6">
+                        <label for="EndDate" class="form-label">End Date</label>
+                        <input type="datetime-local" class="form-control" id="EndDate" name="EndDate"
+                               value="@Model.EndDate.ToString("yyyy-MM-ddTHH:mm")" required />
+                    </div>
+                </div>
+
+                <!-- Description -->
+                <div class="mb-3">
+                    <label for="Details" class="form-label">Description</label>
+                    <textarea class="form-control" id="Details" name="Details" rows="4" required>@Model.Details</textarea>
+                </div>
+
+                <!-- Team Members -->
+                <div class="mb-3">
+                    <label class="form-label">Team Members</label>
+                    <ul class="list-group mb-2">
+                        @foreach (var member in Model.Name)
+                        {
+                            <li class="list-group-item">
+                                @{ int i = 0;
+
+                                    @member
+                                    @Html.ActionLink(
+                                        "Delete",                           // Link text
+                                        "RemoveMember",                     // Action name
+                                        "Supervisor",                       // Controller name
+                                        new { ProjectId = Model.Id, MemberId = Model.MemberId[i] }, // Route values
+                                        new
+                                             {
+                                                 @class = "btn btn-sm btn-danger",
+                                              onclick = $"return confirm('Are you sure you want to remove {member}?');"
+                                             } // HTML attributes
+                                    )}
+                            </li>
+                        }
+                    </ul>
+                    <small class="text-muted">To change members, please manage them in the Project Members page.</small>
+                </div>
+
+                <!-- Submit Button -->
+                <div class="text-end">
+                    <button type="submit" class="btn btn-primary">Save Changes</button>
+                    <a href="@Url.Action("ProjectDetail", "Supervisor", new { Id = Model.Id })" class="btn btn-outline-secondary ms-2">Cancel</a>
+                </div>
+
+            </div>
+        </div>
+    </form>
+</div>
+
+

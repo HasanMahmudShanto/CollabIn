@@ -32,6 +32,7 @@
     <Property Name="StartDate" Type="datetime" Nullable="false" />
     <Property Name="EndDate" Type="datetime" Nullable="false" />
     <Property Name="SupervisorId" Type="int" Nullable="false" />
+    <Property Name="Details" Type="nvarchar(max)" Nullable="false" />
   </EntityType>
   <EntityType Name="Supervisors">
     <Key>

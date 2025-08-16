@@ -27,6 +27,7 @@ namespace CollabIn.EF
         public System.DateTime StartDate { get; set; }
         public System.DateTime EndDate { get; set; }
         public int SupervisorId { get; set; }
+        public string Details { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<ProjectMember> ProjectMembers { get; set; }

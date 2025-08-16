@@ -1,0 +1,82 @@
+﻿
+@{
+    ViewBag.Title = "ProjectDetail";
+}
+
+<h2>ProjectDetail</h2>
+
+
+<div class="container my-5">
+    <!-- Header -->
+    <div class="row mb-4">
+        @if (TempData["SuccessMsg"] != null)
+        {
+            <div class="alert alert-success rounded-3" role="alert">
+                @TempData["SuccessMsg"]
+            </div>
+        }
+        <div class="col">
+            <h2 class="fw-bold">@Model.Title</h2>
+            <p class="card-text mb-2">
+                @{
+                    string badgeClass = "bg-secondary"; // default
+
+                    if (Model.Status == "Open")
+                    {
+                        badgeClass = "bg-primary";
+                    }
+                    else if (Model.Status == "Ongoing")
+                    {
+                        badgeClass = "bg-warning text-dark";
+                    }
+                    else if (Model.Status == "Closed")
+                    {
+                        badgeClass = "bg-success";
+                    }
+                }
+
+                <span class="badge @badgeClass">@Model.Status</span>
+            </p>
+            <!-- Use bg-warning text-dark for Ongoing, bg-success for Closed -->
+        </div>
+        <div class="col text-end">
+            @Html.ActionLink("Edit", "Edit", "Supervisor",
+            new { Id = @Model.Id },
+            new { @class = "btn btn-outline-secondary me-2" })
+            @Html.ActionLink("View", "SupervisorDashboard", "Supervisor",
+            new { @class = "btn btn-primary" })
+        </div>
+    </div>
+
+    <!-- Project Details Card -->
+    <div class="card shadow-sm border-0">
+        <div class="card-body">
+            <div class="row mb-3">
+                <div class="col-md-6">
+                    <p class="mb-1 text-muted">Start Date</p>
+                    <p class="fw-semibold">@Model.StartDate</p>
+                </div>
+                <div class="col-md-6">
+                    <p class="mb-1 text-muted">End Date</p>
+                    <p class="fw-semibold">@Model.EndDate</p>
+                </div>
+            </div>
+
+            <div class="mb-4">
+                <p class="mb-1 text-muted">Description</p>
+                <p class="fw-semibold">@Model.Details</p>
+            </div>
+
+            <div>
+                <p class="mb-1 text-muted">Team Members</p>
+                <ul class="list-group list-group-flush">
+                    @foreach (var item in Model.Name)
+                    {
+                        <li class="list-group-item">@item</li>
+                    }
+                </ul>
+            </div>
+        </div>
+    </div>
+</div>
+
