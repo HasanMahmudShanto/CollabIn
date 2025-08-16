@@ -28,8 +28,6 @@ namespace CollabIn.Controllers
                 return View(Model);
 
             var PasswordHash = GetMd5Hash(Model.Password);
-            string RedirectController = "";
-            bool UserFound = false;
 
             if (Model.Usertype == "Member")
             {
@@ -39,9 +37,9 @@ namespace CollabIn.Controllers
                         select u).SingleOrDefault();
                 if (User != null)
                 {
-                    UserFound = true;
                     Session["user"] = User;
-                    RedirectController = "MemberDashboard";
+                    return RedirectToAction("MemberDashboard", "Member");
+
                 }
                 
             }
@@ -53,21 +51,14 @@ namespace CollabIn.Controllers
                         select u).SingleOrDefault();
                 if (User != null)
                 {
-                    UserFound = true;
                     Session["User"] = User;
-                    RedirectController = "SupervisorDashboard";
+                    return RedirectToAction("SupervisorDashboard", "Supervisor");
                 }
                 
             }
 
-            if (!UserFound)
-            {
-                TempData["ErrorMsg"] = "Invalid Username or Password";
-                return View(Model);
-            }
-            
-            // Login successful
-            return RedirectToAction(RedirectController,"Supervisor");
+            TempData["ErrorMsg"] = "Invalid Username or Password";
+            return View(Model);
         }
 
 

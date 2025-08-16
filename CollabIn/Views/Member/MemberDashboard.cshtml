@@ -1,0 +1,46 @@
+﻿@{
+    ViewBag.Title = "MemberDashboard";
+}
+
+<h2>MemberDashboard</h2>
+
+<div class="container my-5">
+    <div class="row mb-4 align-items-center">
+        <div class="col">
+            <h2 class="fw-bold">Available Projects</h2>
+            <p class="text-muted">Browse and join projects you are interested in</p>
+        </div>
+    </div>
+
+    <div class="row g-4">
+        <!-- Example: Loop through available projects -->
+        @foreach (var item in Model)
+        {
+            <div class="col-md-4">
+                <div class="card h-100 shadow-sm">
+                    <div class="card-body d-flex flex-column">
+                        <h5 class="card-title">@item.Title</h5>
+                        <p class="card-text mb-2">
+                            <span class="badge bg-primary">@item.Status</span>
+                        </p>
+                        <p class="card-text mb-2"><strong>Start:</strong> @item.StartDate</p>
+                        <p class="card-text mb-2"><strong>End:</strong> @item.EndDate</p>
+                        <p class="card-text mb-3"><strong>Members:</strong> @item.Members/4</p>
+
+                        <div class="mt-auto d-flex justify-content-between">
+                            @Html.ActionLink("View", "ProjectDetail", "Member",
+                            new { Id = @item.Id },
+                            new { @class = "btn btn-outline-primary btn-sm" })
+                            @Html.ActionLink("Join", "JoinProject", "Member",
+                            new { Id = @item.Id },
+                            new { @class = "btn btn-success btn-sm" })
+                        </div>
+                    </div>
+                </div>
+            </div>
+        }
+
+
+        <!-- Copy this card block for multiple projects -->
+    </div>
+</div>

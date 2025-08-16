@@ -154,7 +154,7 @@ namespace CollabIn.Controllers
                 db.SaveChanges();
                 TempData["SuccessMsg"] = "Member removed from project successfully.";
             }
-            return RedirectToAction("ProjectDetail", new { Id = ProjectId });
+            return RedirectToAction("Edit", new { Id = ProjectId });
         }
     }
 }

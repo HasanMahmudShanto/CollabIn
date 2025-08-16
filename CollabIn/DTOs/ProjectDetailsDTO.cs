@@ -17,5 +17,6 @@ namespace CollabIn.DTOs
         public string Details { get; set; }
         public List<string> Name { get; set; }
         public List<int> MemberId { get; set; }
+        public string SupervisorName { get; set; }
     }
 }

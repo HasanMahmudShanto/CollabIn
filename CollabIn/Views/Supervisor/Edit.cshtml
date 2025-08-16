@@ -3,7 +3,6 @@
     ViewBag.Title = "Edit";
 }
 
-<h2>Edit</h2>
 
 @model CollabIn.DTOs.ProjectDetailsDTO
 
@@ -27,9 +26,6 @@
         <div class="row mb-4">
             <div class="col">
                 <h2 class="fw-bold">Edit Project: @Model.Title</h2>
-            </div>
-            <div class="col text-end">
-                <a href="@Url.Action("Dashboard", "Supervisor")" class="btn btn-outline-secondary me-2">Back to Dashboard</a>
             </div>
         </div>
 
@@ -72,33 +68,28 @@
                     <label for="Details" class="form-label">Description</label>
                     <textarea class="form-control" id="Details" name="Details" rows="4" required>@Model.Details</textarea>
                 </div>
-
+                <label for="Members" class="form-label">Team Members</label>
                 <!-- Team Members -->
-                <div class="mb-3">
-                    <label class="form-label">Team Members</label>
-                    <ul class="list-group mb-2">
-                        @foreach (var member in Model.Name)
-                        {
-                            <li class="list-group-item">
-                                @{ int i = 0;
+                <ul class="list-group mb-2">
+                    @for (int i = 0; i < Model.Name.Count; i++)
+                    {
+                        <li class="list-group-item d-flex justify-content-between align-items-center">
+                            <span>@Model.Name[i]</span>
+                            @Html.ActionLink(
+                                "Delete",
+                                "RemoveMember",
+                                "Supervisor",
+                                new { ProjectId = Model.Id, MemberId = Model.MemberId[i] },
+                                new
+                                     {
+                                    @class = "btn btn-sm btn-danger",
+                                    onclick = $"return confirm('Are you sure you want to remove {Model.Name[i]}?');"
+                                }
+                            )
+                        </li>
+                    }
+                </ul>
 
-                                    @member
-                                    @Html.ActionLink(
-                                        "Delete",                           // Link text
-                                        "RemoveMember",                     // Action name
-                                        "Supervisor",                       // Controller name
-                                        new { ProjectId = Model.Id, MemberId = Model.MemberId[i] }, // Route values
-                                        new
-                                             {
-                                                 @class = "btn btn-sm btn-danger",
-                                              onclick = $"return confirm('Are you sure you want to remove {member}?');"
-                                             } // HTML attributes
-                                    )}
-                            </li>
-                        }
-                    </ul>
-                    <small class="text-muted">To change members, please manage them in the Project Members page.</small>
-                </div>
 
                 <!-- Submit Button -->
                 <div class="text-end">

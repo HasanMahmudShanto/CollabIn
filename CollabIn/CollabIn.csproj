@@ -197,6 +197,7 @@
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\AuthController.cs" />
+    <Compile Include="Controllers\MemberController.cs" />
     <Compile Include="Controllers\SupervisorController.cs" />
     <Compile Include="DTOs\ProjectDetailsDTO.cs" />
     <Compile Include="DTOs\ProjectDTO.cs" />
@@ -309,6 +310,8 @@
     <Content Include="Views\Supervisor\SupervisorDashboard.cshtml" />
     <Content Include="Views\Supervisor\ProjectDetail.cshtml" />
     <Content Include="Views\Supervisor\Edit.cshtml" />
+    <Content Include="Views\Member\MemberDashboard.cshtml" />
+    <Content Include="Views\Member\ProjectDetail.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
