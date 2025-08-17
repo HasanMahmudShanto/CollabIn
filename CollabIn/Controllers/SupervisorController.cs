@@ -66,7 +66,7 @@ namespace CollabIn.Controllers
             return View();
         }
         [HttpPost]
-        public ActionResult Create(string Title, DateTime StartDate, DateTime EndDate)
+        public ActionResult Create(string Title, DateTime StartDate, DateTime EndDate, string Details)
         {
             if (Session["User"] == null)
             {
@@ -85,6 +85,7 @@ namespace CollabIn.Controllers
                 StartDate = StartDate,
                 EndDate = EndDate,
                 SupervisorId = SupervisorID,
+                Details = Details,
 
             };
             db.Projects.Add(NewProject);

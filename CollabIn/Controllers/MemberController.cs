@@ -23,7 +23,8 @@ namespace CollabIn.Controllers
         }
         static Mapper GetMapperForDetails()
         {
-            var config = new MapperConfiguration(cfg => {
+            var config = new MapperConfiguration(cfg =>
+            {
                 cfg.CreateMap<Project, ProjectDetailsDTO>().ReverseMap();
             });
             return new Mapper(config);
@@ -62,6 +63,32 @@ namespace CollabIn.Controllers
                 .Select(s => s.Username)
                 .FirstOrDefault();
             return View(ProjectDetailsData);
+        }
+
+        public ActionResult JoinProject(int Id)
+        {
+            if (Session["User"] == null)
+            {
+                return RedirectToAction("Login", "Auth");
+            }
+            var member = (Member)Session["User"];
+            var projectMember = new ProjectMember
+            {
+                ProjectId = Id,
+                MemberId = member.Id
+            };
+            var ProjectData = db.Projects.FirstOrDefault(p => p.Id == Id);
+            if (ProjectData == null)
+            {
+                return HttpNotFound();
+            }
+            ProjectData.Members++;
+            db.SaveChanges();
+            db.ProjectMembers.Add(projectMember);
+            db.SaveChanges();
+
+            TempData["SuccessMsg"] = $"You have successfully joined {ProjectData.Title}";
+            return RedirectToAction("MemberDashboard");
         }
     }
 }
