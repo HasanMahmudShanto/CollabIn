@@ -4,6 +4,13 @@
 
 <h2>MemberDashboard</h2>
 
+@if (TempData["SuccessMsg"] != null)
+{
+    <div class="alert alert-success rounded-3" role="alert">
+        @TempData["SuccessMsg"]
+    </div>
+}
+
 <div class="container my-5">
     <div class="row mb-4 align-items-center">
         <div class="col">
@@ -26,6 +33,17 @@
                         <p class="card-text mb-2"><strong>Start:</strong> @item.StartDate</p>
                         <p class="card-text mb-2"><strong>End:</strong> @item.EndDate</p>
                         <p class="card-text mb-3"><strong>Members:</strong> @item.Members/4</p>
+                        @{
+                            var JoinButtonClass = "";
+                            if (item.Members == 4)
+                            {
+                                JoinButtonClass = "btn btn-success btn-sm disabled";
+                            }
+                            else
+                            {
+                                JoinButtonClass = "btn btn-success btn-sm";
+                            }
+                        }
 
                         <div class="mt-auto d-flex justify-content-between">
                             @Html.ActionLink("View", "ProjectDetail", "Member",
@@ -33,7 +51,7 @@
                             new { @class = "btn btn-outline-primary btn-sm" })
                             @Html.ActionLink("Join", "JoinProject", "Member",
                             new { Id = @item.Id },
-                            new { @class = "btn btn-success btn-sm" })
+                            new { @class = JoinButtonClass })
                         </div>
                     </div>
                 </div>
