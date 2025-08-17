@@ -35,6 +35,10 @@ namespace CollabIn.Controllers
             {
                 return RedirectToAction("Login", "Auth");
             }
+            if (Session["UserType"] != "Member")
+            {
+                return HttpNotFound();
+            }
             var Data = db.Projects.ToList();
             var Projects = GetMapperForDashboard().Map<List<ProjectDTO>>(Data);
 
@@ -42,6 +46,14 @@ namespace CollabIn.Controllers
         }
         public ActionResult ProjectDetail(int Id)
         {
+            if (Session["User"] == null)
+            {
+                return RedirectToAction("Login", "Auth");
+            }
+            if (Session["UserType"] != "Member")
+            {
+                return HttpNotFound();
+            }
             var ProjectsData = db.Projects.FirstOrDefault(p => p.Id == Id);
             if (ProjectsData == null)
             {
@@ -70,6 +82,10 @@ namespace CollabIn.Controllers
             if (Session["User"] == null)
             {
                 return RedirectToAction("Login", "Auth");
+            }
+            if (Session["UserType"] != "Member")
+            {
+                return HttpNotFound();
             }
             var member = (Member)Session["User"];
             var projectMember = new ProjectMember

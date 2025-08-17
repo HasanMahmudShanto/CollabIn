@@ -38,6 +38,7 @@ namespace CollabIn.Controllers
                 if (User != null)
                 {
                     Session["user"] = User;
+                    Session["UserType"] = "Member";
                     return RedirectToAction("MemberDashboard", "Member");
 
                 }
@@ -52,6 +53,7 @@ namespace CollabIn.Controllers
                 if (User != null)
                 {
                     Session["User"] = User;
+                    Session["UserType"] = "Supervisor";
                     return RedirectToAction("SupervisorDashboard", "Supervisor");
                 }
                 

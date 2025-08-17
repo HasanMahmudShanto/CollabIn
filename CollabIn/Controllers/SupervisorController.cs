@@ -34,12 +34,24 @@ namespace CollabIn.Controllers
             {
                 return RedirectToAction("Login", "Auth");
             }
+            if (Session["UserType"] != "Supervisor")
+            {
+                return HttpNotFound();
+            }
             var Data = db.Projects.ToList();
             var Projects = GetMapperForDashboard().Map<List<ProjectDTO>>(Data);
             return View(Projects);
         }
         public ActionResult ProjectDetail(int Id)
         {
+            if (Session["User"] == null)
+            {
+                return RedirectToAction("Login", "Auth");
+            }
+            if (Session["UserType"] != "Supervisor")
+            {
+                return HttpNotFound();
+            }
             var ProjectsData = db.Projects.FirstOrDefault(p => p.Id == Id);
          
             var MemberIds = db.ProjectMembers
@@ -63,6 +75,10 @@ namespace CollabIn.Controllers
             {
                 return RedirectToAction("Login", "Auth");
             }
+            if (Session["UserType"] != "Supervisor")
+            {
+                return HttpNotFound();
+            }
             return View();
         }
         [HttpPost]
@@ -71,6 +87,10 @@ namespace CollabIn.Controllers
             if (Session["User"] == null)
             {
                 return RedirectToAction("Login", "Auth");
+            }
+            if (Session["UserType"] != "Supervisor")
+            {
+                return HttpNotFound();
             }
             var User = (Supervisor)Session["User"];
             int SupervisorID = User.Id;
@@ -101,6 +121,10 @@ namespace CollabIn.Controllers
             {
                 return RedirectToAction("Login", "Auth");
             }
+            if (Session["UserType"] != "Supervisor")
+            {
+                return HttpNotFound();
+            }
             var ProjectData = db.Projects.FirstOrDefault(p => p.Id == Id);
             if (ProjectData == null)
             {
@@ -127,6 +151,10 @@ namespace CollabIn.Controllers
             {
                 return RedirectToAction("Login", "Auth");
             }
+            if (Session["UserType"] != "Supervisor")
+            {
+                return HttpNotFound();
+            }
             var ProjectData = db.Projects.FirstOrDefault(p => p.Id == Id);
             if (ProjectData == null)
             {
@@ -146,6 +174,10 @@ namespace CollabIn.Controllers
             if (Session["User"] == null)
             {
                 return RedirectToAction("Login", "Auth");
+            }
+            if (Session["UserType"] != "Supervisor")
+            {
+                return HttpNotFound();
             }
             var ProjectMember = db.ProjectMembers
                 .FirstOrDefault(pm => pm.ProjectId == ProjectId && pm.MemberId == MemberId);
