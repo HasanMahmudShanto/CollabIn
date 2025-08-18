@@ -88,6 +88,15 @@ namespace CollabIn.Controllers
                 return HttpNotFound();
             }
             var member = (Member)Session["User"];
+            bool alreadyJoined = db.ProjectMembers
+            .Any(pm => pm.ProjectId == Id && pm.MemberId == member.Id);
+
+            if (alreadyJoined)
+            {
+                TempData["ErrorMsg"] = "You have already joined this project.";
+                return RedirectToAction("MemberDashboard");
+            }
+
             var projectMember = new ProjectMember
             {
                 ProjectId = Id,

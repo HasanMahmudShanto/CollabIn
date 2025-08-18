@@ -184,6 +184,12 @@ namespace CollabIn.Controllers
             if (ProjectMember != null)
             {
                 db.ProjectMembers.Remove(ProjectMember);
+                var project = db.Projects.FirstOrDefault(p => p.Id == ProjectId);
+                if (project != null && project.Members > 0)  
+                {
+                    project.Members--;
+                }
+
                 db.SaveChanges();
                 TempData["SuccessMsg"] = "Member removed from project successfully.";
             }
