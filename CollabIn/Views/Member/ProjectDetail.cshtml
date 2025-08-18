@@ -32,8 +32,23 @@
             <!-- Use bg-warning text-dark for Ongoing, bg-success for Closed -->
         </div>
         <div class="col text-end">
+            @{
+                var JoinButtonClass = "";
+                if (Model.Members == 4)
+                {
+                    JoinButtonClass = "btn btn-success btn-sm disabled";
+                }
+                else
+                {
+                    JoinButtonClass = "btn btn-success btn-sm";
+                }
+            }
             @Html.ActionLink("Back", "MemberDashboard", "Supervisor",
-            new { @class = "btn btn-primary" })
+            new { @class = "btn btn-primary btn-sm" })
+
+            @Html.ActionLink("Join", "JoinProject", "Member",
+            new { Id = Model.Id },
+            new { @class = JoinButtonClass })
         </div>
     </div>
 
