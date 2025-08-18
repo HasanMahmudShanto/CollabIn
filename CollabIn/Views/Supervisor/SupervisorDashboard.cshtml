@@ -6,6 +6,12 @@
 <h2>SupervisorDashboard</h2>
 
 <div class="container my-5">
+    @if (TempData["DeleteSuccessMsg"] != null)
+    {
+        <div class="alert alert-success rounded-3 shadow-sm" role="alert">
+            <i class="bi bi-check-circle me-2"></i> @TempData["DeleteSuccessMsg"]
+        </div>
+    }
     <div class="row mb-4 align-items-center">
         <div class="col">
             <h2 class="fw-bold">Your Projects</h2>
@@ -13,7 +19,7 @@
         </div>
         <div class="col text-end">
             @Html.ActionLink("Create New Project", "Create", "Supervisor",
-            new {@class = "btn btn-success"})
+            new { @class = "btn btn-success" })
         </div>
     </div>
 
@@ -50,11 +56,17 @@
                             <p class="card-text mb-2"><strong>End:</strong> @item.EndDate</p>
                             <p class="card-text mb-3"><strong>Members:</strong> @item.Members</p>
                             <div class="mt-auto">
-                                @Html.ActionLink( "View", "ProjectDetail", "Supervisor", 
-                                new{Id = @item.Id}, 
-                                new {@class = "btn btn-primary btn-sm me-2"})
+                                @Html.ActionLink("View", "ProjectDetail", "Supervisor",
+                                new { Id = @item.Id },
+                                new { @class = "btn btn-primary btn-sm me-2" })
 
-                                <a href="#" class="btn btn-outline-secondary btn-sm">Edit</a>
+                                @Html.ActionLink("Edit", "Edit", "Supervisor",
+                                new { Id = @item.Id },
+                                new { @class = "btn btn-primary btn-sm me-2" })
+
+                                @Html.ActionLink("Delete", "DeleteProject", "Supervisor",
+                                new { Id = @item.Id },
+                                new { @class = "btn btn-primary btn-sm me-2" })
                             </div>
                         </div>
                     </div>

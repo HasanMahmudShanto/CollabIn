@@ -189,5 +189,31 @@ namespace CollabIn.Controllers
             }
             return RedirectToAction("Edit", new { Id = ProjectId });
         }
+
+        public ActionResult DeleteProject(int Id) 
+        {
+            if (Session["User"] == null)
+            {
+                return RedirectToAction("Login", "Auth");
+            }
+            if (Session["UserType"] != "Supervisor")
+            {
+                return HttpNotFound();
+            }
+            var Project = db.Projects
+                .FirstOrDefault(pm => pm.Id == Id);
+            var ProjectMember = db.ProjectMembers
+                .FirstOrDefault(pm => pm.ProjectId.Equals(Id));
+            var ProjectTitle = Project.Title;
+            if (Project != null)
+            {
+                db.Projects.Remove(Project);
+
+                db.ProjectMembers.Remove(ProjectMember);
+                db.SaveChanges();
+                TempData["DeleteSuccessMsg"] = $"{ProjectTitle} is removed";
+            }
+            return RedirectToAction("SupervisorDashboard");
+        }
     }
 }
