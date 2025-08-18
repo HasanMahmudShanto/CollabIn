@@ -16,11 +16,23 @@
                 <span class="navbar-toggler-icon"></span>
             </button>
             <div class="collapse navbar-collapse d-sm-inline-flex justify-content-between">
-                <ul class="navbar-nav flex-grow-1">
-                    <li>@Html.ActionLink("Home", "Index", "Home", new { area = "" }, new { @class = "nav-link" })</li>
-                    <li>@Html.ActionLink("About", "About", "Home", new { area = "" }, new { @class = "nav-link" })</li>
-                    <li>@Html.ActionLink("Contact", "Contact", "Home", new { area = "" }, new { @class = "nav-link" })</li>
-                </ul>
+                @{
+                    if (Session["UserType"] == "Supervisor")
+                    {
+                        <ul class="navbar-nav flex-grow-1">
+                            <li>@Html.ActionLink("Dashboard", "SupervisorDashboard", "Supervisor", new { area = "" }, new { @class = "nav-link" })</li>
+                            <li>@Html.ActionLink("Create project", "Create", "Supervisor", new { area = "" }, new { @class = "nav-link" })</li>
+                        </ul>
+                    }
+                    else if (Session["UserType"] == "Member")
+                    {
+                        <ul class="navbar-nav flex-grow-1">
+                            <li>@Html.ActionLink("Dashboard", "MemberDashboard", "Member", new { area = "" }, new { @class = "nav-link" })</li>
+                        </ul>
+                    }
+                }
+                
+
             </div>
         </div>
     </nav>
