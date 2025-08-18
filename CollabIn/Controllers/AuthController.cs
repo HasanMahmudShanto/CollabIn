@@ -108,6 +108,11 @@ namespace CollabIn.Controllers
             db.SaveChanges();
             return RedirectToAction("Login");
         }
+        public ActionResult Logout()
+        {
+            Session.Clear();
+            return RedirectToAction("Login");
+        }
         static string GetMd5Hash(string input)
         {
             // Create MD5 instance

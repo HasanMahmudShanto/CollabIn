@@ -30,8 +30,17 @@
                             <li>@Html.ActionLink("Dashboard", "MemberDashboard", "Member", new { area = "" }, new { @class = "nav-link" })</li>
                         </ul>
                     }
+                    if (Session["User"] != null)
+                    {
+                        <ul class="navbar-nav ms-auto">
+                            <li class="nav-item">
+                                @Html.ActionLink("Logout", "Logout", "Auth", null, new { @class = "nav-link" })
+                            </li>
+                        </ul>
+                    }
                 }
-                
+
+
 
             </div>
         </div>
